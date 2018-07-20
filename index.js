@@ -13,12 +13,14 @@ fs.readFile('users.json', {encoding: 'utf8'}, (err, data) => {
             user.name.full = _.startCase(user.name.first + ' ' + user.name.last)
             users.push(user)
     })
-})
+ })
 
 app.engine('hbs', engines.handlebars)
 
 app.set('views', "./views")
 app.set('view engine', 'hbs')
+
+app.use(express.static('images'))
 
 app.get(/big.*/, (req, res, next) => {
     console.log('BIG USER MOTHAFUCKING ACCESS!')
@@ -31,7 +33,7 @@ app.get(/.*dog.*/, (req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    res.render('index', {users: users})
+    res.render('index', {usersa: users})
 
     // let buffer = ''
     // users.forEach(user =>  buffer += '<a href="/' + user.username + '">' + user.name.full + '</a>' + '<br>')
