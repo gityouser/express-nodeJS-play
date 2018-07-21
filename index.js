@@ -20,7 +20,7 @@ app.engine('hbs', engines.handlebars)
 app.set('views', "./views")
 app.set('view engine', 'hbs')
 
-app.use(express.static('images'))
+app.use("/profilepics", express.static('images'))
 
 app.get(/big.*/, (req, res, next) => {
     console.log('BIG USER MOTHAFUCKING ACCESS!')
@@ -35,17 +35,14 @@ app.get(/.*dog.*/, (req, res, next) => {
 app.get('/', (req, res) => {
     res.render('index', {usersa: users})
 
-    // let buffer = ''
-    // users.forEach(user =>  buffer += '<a href="/' + user.username + '">' + user.name.full + '</a>' + '<br>')
-                             
-    // res.send(buffer)
 })
 
 
 
 
 app.get('/:username', (req, res) => {
-    res.send(`You accessed ${req.params.username}'s profile.`)
+    const username = req.params.username
+    res.render('user', {username: username})
 })
 
 var server = app.listen(4000, () => {
