@@ -22,22 +22,11 @@ app.set('view engine', 'hbs')
 
 app.use("/profilepics", express.static('images'))
 
-app.get(/big.*/, (req, res, next) => {
-    console.log('BIG USER MOTHAFUCKING ACCESS!')
-    next()
-})
-
-app.get(/.*dog.*/, (req, res, next) => {
-    console.log("GOOD DOGO!!")
-    next()
-})
 
 app.get('/', (req, res) => {
     res.render('index', {usersa: users})
 
 })
-
-
 
 
 app.get('/:username', (req, res) => {
